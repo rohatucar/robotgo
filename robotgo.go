@@ -9,20 +9,22 @@
 // except according to those terms.
 
 /*
-
 Package robotgo Go native cross-platform system automation.
 
 Please make sure Golang, GCC is installed correctly before installing RobotGo;
 
 See Requirements:
+
 	https://github.com/go-vgo/robotgo#requirements
 
 Installation:
 
 With Go module support (Go 1.11+), just import:
+
 	import "github.com/go-vgo/robotgo"
 
 Otherwise, to install the robotgo package, run the command:
+
 	go get -u github.com/go-vgo/robotgo
 */
 package robotgo
@@ -500,8 +502,9 @@ func MoveMouse(x, y int) {
 // Move move the mouse to (x, y)
 //
 // Examples:
-// 	robotgo.MouseSleep = 100  // 100 millisecond
-// 	robotgo.Move(10, 10)
+//
+//	robotgo.MouseSleep = 100  // 100 millisecond
+//	robotgo.Move(10, 10)
 func Move(x, y int) {
 	// if runtime.GOOS == "windows" {
 	// 	f := ScaleF()
@@ -547,6 +550,7 @@ func Drag(x, y int, args ...string) {
 // DragSmooth drag the mouse like smooth to (x, y)
 //
 // Examples:
+//
 //	robotgo.DragSmooth(10, 10)
 func DragSmooth(x, y int, args ...interface{}) {
 	Toggle("left")
@@ -569,6 +573,7 @@ func MoveMouseSmooth(x, y int, args ...interface{}) bool {
 // robotgo.MoveSmooth(x, y int, low, high float64, mouseDelay int)
 //
 // Examples:
+//
 //	robotgo.MoveSmooth(10, 10)
 //	robotgo.MoveSmooth(10, 10, 1.0, 2.0)
 func MoveSmooth(x, y int, args ...interface{}) bool {
@@ -635,7 +640,7 @@ func GetMousePos() (int, int) {
 
 // Deprecated: use the Click(),
 //
-// MouseClick click the mouse
+// # MouseClick click the mouse
 //
 // robotgo.MouseClick(button string, double bool)
 func MouseClick(args ...interface{}) {
@@ -647,7 +652,8 @@ func MouseClick(args ...interface{}) {
 // robotgo.Click(button string, double bool)
 //
 // Examples:
-// 	robotgo.Click() // default is left button
+//
+//	robotgo.Click() // default is left button
 //	robotgo.Click("right")
 //	robotgo.Click("wheelLeft")
 func Click(args ...interface{}) {
@@ -673,6 +679,7 @@ func Click(args ...interface{}) {
 // robotgo.MoveClick(x, y int, button string, double bool)
 //
 // Examples:
+//
 //	robotgo.MouseSleep = 100
 //	robotgo.MoveClick(10, 10)
 func MoveClick(x, y int, args ...interface{}) {
@@ -691,10 +698,12 @@ func MovesClick(x, y int, args ...interface{}) {
 }
 
 // Toggle toggle the mouse, support button:
-//	"left", "center", "right",
-//  "wheelDown", "wheelUp", "wheelLeft", "wheelRight"
+//
+//		"left", "center", "right",
+//	 "wheelDown", "wheelUp", "wheelLeft", "wheelRight"
 //
 // Examples:
+//
 //	robotgo.Toggle("left") // default is down
 //	robotgo.Toggle("left", "up")
 func Toggle(key ...string) int {
@@ -715,10 +724,11 @@ func Toggle(key ...string) int {
 
 // Deprecated: use the Toggle(),
 //
-// MouseToggle toggle the mouse
+// # MouseToggle toggle the mouse
 //
 // Examples:
-// 	robotgo.MouseToggle("down", "right")
+//
+//	robotgo.MouseToggle("down", "right")
 //	robotgo.MouseToggle("up", "right")
 func MouseToggle(togKey string, args ...interface{}) int {
 	var button C.MMMouseButton = C.LEFT_BUTTON
@@ -740,6 +750,7 @@ func MouseToggle(togKey string, args ...interface{}) int {
 // ScrollMouse scroll the mouse to (x, "up")
 //
 // Examples:
+//
 //	robotgo.ScrollMouse(10, "down")
 //	robotgo.ScrollMouse(10, "up")
 func ScrollMouse(x int, direction string) {
@@ -756,6 +767,7 @@ func ScrollMouse(x int, direction string) {
 // robotgo.Scroll(x, y, msDelay int)
 //
 // Examples:
+//
 //	robotgo.Scroll(10, 10)
 func Scroll(x, y int, args ...int) {
 	var msDelay = 10
@@ -777,6 +789,7 @@ func Scroll(x, y int, args ...int) {
 // robotgo.ScrollSmooth(toy, num, sleep, tox)
 //
 // Examples:
+//
 //	robotgo.ScrollSmooth(-10)
 //	robotgo.ScrollSmooth(-10, 6, 200, -10)
 func ScrollSmooth(to int, args ...int) {
@@ -808,6 +821,7 @@ func ScrollSmooth(to int, args ...int) {
 // ScrollRelative scroll mouse with relative
 //
 // Examples:
+//
 //	robotgo.ScrollRelative(10, 10)
 func ScrollRelative(x, y int, args ...int) {
 	mx, my := MoveArgs(x, y)
@@ -833,16 +847,17 @@ func SetMouseDelay(delay int) {
 // KeyTap tap the keyboard code;
 //
 // See keys:
+//
 //	https://github.com/go-vgo/robotgo/blob/master/docs/keys.md
 //
 // Examples:
+//
 //	robotgo.KeySleep = 100 // 100 millisecond
 //	robotgo.KeyTap("a")
 //	robotgo.KeyTap("i", "alt", "command")
 //
 //	arr := []string{"alt", "command"}
 //	robotgo.KeyTap("i", arr)
-//
 func KeyTap(tapKey string, args ...interface{}) string {
 	var (
 		akey     string
@@ -934,14 +949,15 @@ func KeyTap(tapKey string, args ...interface{}) string {
 // KeyToggle toggle the keyboard, if there not have args default is "down"
 //
 // See keys:
+//
 //	https://github.com/go-vgo/robotgo/blob/master/docs/keys.md
 //
 // Examples:
+//
 //	robotgo.KeyToggle("a")
 //	robotgo.KeyToggle("a", "up")
 //
 //	robotgo.KeyToggle("a", "up", "alt", "cmd")
-//
 func KeyToggle(key string, args ...string) string {
 	if len(args) <= 0 {
 		args = append(args, "down")
@@ -1080,8 +1096,8 @@ func inputUTF(str string) {
 // robotgo.TypeStr(string: The string to send, float64: microsleep time, x11 option)
 //
 // Examples:
-//	robotgo.TypeStr("abc@123, hi, こんにちは")
 //
+//	robotgo.TypeStr("abc@123, hi, こんにちは")
 func TypeStr(str string, args ...float64) {
 	var tm, tm1 = 0.0, 7.0
 
@@ -1144,7 +1160,7 @@ func TypeStrDelay(str string, delay int) {
 
 // Deprecated: use the TypeStr(),
 //
-// TypeStringDelayed type string delayed, Wno-deprecated
+// # TypeStringDelayed type string delayed, Wno-deprecated
 //
 // This function will be removed in version v1.0.0
 func TypeStringDelayed(str string, delay int) {
@@ -1331,7 +1347,7 @@ func GetHandle() int {
 
 // Deprecated: use the GetHandle(),
 //
-// GetBHandle get the window handle, Wno-deprecated
+// # GetBHandle get the window handle, Wno-deprecated
 //
 // This function will be removed in version v1.0.0
 func GetBHandle() int {
@@ -1352,6 +1368,7 @@ func cgetTitle(hwnd, isHwnd int32) string {
 // GetTitle get the window title return string
 //
 // Examples:
+//
 //	fmt.Println(robotgo.GetTitle())
 //
 //	ids, _ := robotgo.FindIds()
@@ -1412,11 +1429,12 @@ func internalActive(pid int32, hwnd int) {
 // ActiveName active the window by name
 //
 // Examples:
-// 	robotgo.ActiveName("chrome")
+//
+//	robotgo.ActiveName("chrome")
 func ActiveName(name string) error {
 	pids, err := FindIds(name)
 	if err == nil && len(pids) > 0 {
-		return ActivePID(pids[0])
+		return ActivePID(int32(pids[0]))
 	}
 
 	return err
